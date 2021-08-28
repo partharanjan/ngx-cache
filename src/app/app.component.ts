@@ -1,10 +1,26 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'ngx-cache-app';
+export class AppComponent implements OnInit {
+
+  constructor(private http: HttpClient) {
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  load() {
+    this.http.get<any>('https://jsonplaceholder.typicode.com/posts').subscribe(result => {
+      console.log(result);
+    });
+  }
+
+
 }

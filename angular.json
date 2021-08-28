@@ -119,6 +119,46 @@
           }
         }
       }
+    },
+    "ngx-cache": {
+      "projectType": "library",
+      "root": "projects/ngx-cache",
+      "sourceRoot": "projects/ngx-cache/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-cache/tsconfig.lib.json",
+            "project": "projects/ngx-cache/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-cache/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-cache/src/test.ts",
+            "tsConfig": "projects/ngx-cache/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-cache/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-cache/tsconfig.lib.json",
+              "projects/ngx-cache/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-cache-app"
 }

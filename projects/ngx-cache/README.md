@@ -1,24 +1,47 @@
 # NgxCache
+Cache angular HTTP Request
+## Setup
+### NPM
+To setup this package on you project, just call the following command.
+```
+npm i ngx-cache
+```
+### Simple Setup
+On your Angular Project, you shall include the `NgxHttpCacheModule` on your AppModule
+```ts
+import { NgxHttpCacheModule } from 'ngx-cache';
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgxHttpCacheModule.forRoot({
+      cacheAge: 0,
+      cacheHttpMethods: ['GET'],
+      cacheUrls: ['api/json']
+    })
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name --project ngx-cache` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-cache`.
-> Note: Don't forget to add `--project ngx-cache` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build ngx-cache` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ngx-cache`, go to the dist folder `cd dist/ngx-cache` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-cache` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Cache Config
+### CacheAge
+`cacheAge` required for how many miliseconds reqeust will be cache.
+set `cacheAge:0` for no limit
+### cacheHttpMethods
+`cacheHttpMethods` required for which http methods need to be cache like `GET`, `POST` etc.
+Make sure `cacheHttpMethods` should be CAPITAL
+### cacheUrls
+`cacheUrls` required for which urls need to cached.
+Ex. Suppose your URL is https://www.domain.com/user/details/123
+If you want to cache all the url likes `user/details/123`,`user/details/456`  etc
+Simply add `cacheUrls: ['user/details']`, then it will autometically cache all the URL after that
+`cacheUrls` also support query string cache like `user/details/123?page=1&perPage=10`
